@@ -1,0 +1,320 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://ThemeDefault.tres" type="Theme" id=1]
+[ext_resource path="res://SocialMail.gd" type="Script" id=2]
+[ext_resource path="res://Styles/DefaultBoxStyle.tres" type="StyleBox" id=3]
+[ext_resource path="res://icon128.png" type="Texture" id=4]
+[ext_resource path="res://Login.gd" type="Script" id=5]
+[ext_resource path="res://ReadEmailExample.py" type="Script" id=6]
+[ext_resource path="res://Styles/DefaultTextEntryStyle.tres" type="StyleBox" id=7]
+[ext_resource path="res://InfiniteScroll.gd" type="Script" id=8]
+[ext_resource path="res://SocialPostCard.tscn" type="PackedScene" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="MailBox" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -4.0
+focus_next = NodePath("Margin/MenuTabs/Login/Seperator/Input/User")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = -40.0
+margin_bottom = -40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MenuTabs" type="TabContainer" parent="Margin"]
+margin_right = 996.0
+margin_bottom = 1840.0
+focus_mode = 1
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 3 )
+tabs_visible = false
+
+[node name="Login" type="MarginContainer" parent="Margin/MenuTabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 50
+custom_constants/margin_top = 300
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 400
+
+[node name="Seperator" type="HSplitContainer" parent="Margin/MenuTabs/Login"]
+margin_left = 50.0
+margin_top = 300.0
+margin_right = 946.0
+margin_bottom = 1440.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Labels" type="VBoxContainer" parent="Margin/MenuTabs/Login/Seperator"]
+editor/display_folded = true
+margin_right = 218.0
+margin_bottom = 1140.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="info" type="TextureRect" parent="Margin/MenuTabs/Login/Seperator/Labels"]
+margin_right = 218.0
+margin_bottom = 420.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="IMAPLabel" type="Label" parent="Margin/MenuTabs/Login/Seperator/Labels"]
+margin_top = 424.0
+margin_right = 218.0
+margin_bottom = 564.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Server:"
+align = 2
+valign = 1
+
+[node name="UserLabel" type="Label" parent="Margin/MenuTabs/Login/Seperator/Labels"]
+margin_top = 568.0
+margin_right = 218.0
+margin_bottom = 708.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "User Email:"
+align = 2
+valign = 1
+
+[node name="PassLabel" type="Label" parent="Margin/MenuTabs/Login/Seperator/Labels"]
+margin_top = 712.0
+margin_right = 218.0
+margin_bottom = 852.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "User Pass:"
+align = 2
+valign = 1
+
+[node name="LoginButton" type="Button" parent="Margin/MenuTabs/Login/Seperator/Labels"]
+margin_top = 856.0
+margin_right = 218.0
+margin_bottom = 996.0
+focus_next = NodePath("../../Input/IMAP")
+focus_previous = NodePath("../../Input/Pass")
+focus_mode = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+enabled_focus_mode = 1
+text = "Secure Login"
+
+[node name="info2" type="Label" parent="Margin/MenuTabs/Login/Seperator/Labels"]
+margin_top = 1000.0
+margin_right = 218.0
+margin_bottom = 1140.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+align = 2
+
+[node name="Input" type="VBoxContainer" parent="Margin/MenuTabs/Login/Seperator"]
+margin_left = 230.0
+margin_right = 896.0
+margin_bottom = 1140.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+script = ExtResource( 5 )
+
+[node name="PyNode" type="Node2D" parent="Margin/MenuTabs/Login/Seperator/Input"]
+position = Vector2( -135, -100 )
+script = ExtResource( 6 )
+
+[node name="Info" type="RichTextLabel" parent="Margin/MenuTabs/Login/Seperator/Input"]
+margin_right = 666.0
+margin_bottom = 420.0
+rect_pivot_offset = Vector2( 1747, -22 )
+focus_next = NodePath("../User")
+focus_previous = NodePath("../../Labels/LoginButton")
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+bbcode_enabled = true
+bbcode_text = "[center]Unlike other social networking apps,
+SocialMail does not use it's own server,
+Does not collect any user information,
+Does not control any data you choose to share.
+
+It simply requires an email account.
+
+
+
+Please log into your email server below."
+text = "Unlike other social networking apps,
+SocialMail does not use it's own server,
+Does not collect any user information,
+Does not control any data you choose to share.
+
+It simply requires an email account.
+
+
+
+Please log into your email server below."
+
+[node name="ServerSel" type="Button" parent="Margin/MenuTabs/Login/Seperator/Input"]
+editor/display_folded = true
+margin_top = 424.0
+margin_right = 666.0
+margin_bottom = 564.0
+rect_pivot_offset = Vector2( 1747, -22 )
+focus_next = NodePath("../User")
+focus_previous = NodePath("../../Labels/LoginButton")
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = ExtResource( 7 )
+text = "gmail"
+
+[node name="Popup" type="PopupMenu" parent="Margin/MenuTabs/Login/Seperator/Input/ServerSel"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="IMAP" type="LineEdit" parent="Margin/MenuTabs/Login/Seperator/Input"]
+visible = false
+margin_top = 100.0
+margin_right = 999.0
+margin_bottom = 196.0
+rect_pivot_offset = Vector2( 1747, -22 )
+focus_next = NodePath("../User")
+focus_previous = NodePath("../../Labels/LoginButton")
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = ExtResource( 7 )
+text = "imap.gmail.com"
+clear_button_enabled = true
+
+[node name="User" type="LineEdit" parent="Margin/MenuTabs/Login/Seperator/Input"]
+margin_top = 568.0
+margin_right = 666.0
+margin_bottom = 708.0
+focus_next = NodePath("../Pass")
+focus_previous = NodePath("../IMAP")
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = ExtResource( 7 )
+text = "
+"
+clear_button_enabled = true
+
+[node name="Pass" type="LineEdit" parent="Margin/MenuTabs/Login/Seperator/Input"]
+margin_top = 712.0
+margin_right = 666.0
+margin_bottom = 852.0
+focus_next = NodePath("../../Labels/LoginButton")
+focus_previous = NodePath("../User")
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = ExtResource( 7 )
+secret = true
+context_menu_enabled = false
+clear_button_enabled = true
+
+[node name="Error" type="RichTextLabel" parent="Margin/MenuTabs/Login/Seperator/Input"]
+margin_top = 856.0
+margin_right = 666.0
+margin_bottom = 996.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_size = 0
+text = "
+Your login information is stored on your own device, and will never be sent to a third party."
+scroll_active = false
+
+[node name="Info2" type="RichTextLabel" parent="Margin/MenuTabs/Login/Seperator/Input"]
+margin_top = 1000.0
+margin_right = 666.0
+margin_bottom = 1140.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="SocialMail" type="MarginContainer" parent="Margin/MenuTabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 40
+custom_constants/margin_top = 100
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/MenuTabs/SocialMail"]
+margin_left = 40.0
+margin_top = 100.0
+margin_right = 956.0
+margin_bottom = 1800.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Margin/MenuTabs/SocialMail/HBoxContainer"]
+visible = false
+margin_right = 113.0
+margin_bottom = 1700.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Margin/MenuTabs/SocialMail/HBoxContainer"]
+pause_mode = 1
+margin_right = 916.0
+margin_bottom = 1700.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
+scroll_horizontal_enabled = false
+script = ExtResource( 8 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/MenuTabs/SocialMail/HBoxContainer/ScrollContainer"]
+pause_mode = 2
+margin_right = 916.0
+margin_bottom = 1700.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 800
+
+[node name="Control" parent="Margin/MenuTabs/SocialMail/HBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 9 )]
+margin_right = 916.0
+margin_bottom = 1700.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="Margin/MenuTabs/SocialMail/HBoxContainer"]
+visible = false
+margin_left = 785.0
+margin_right = 916.0
+margin_bottom = 1700.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+[connection signal="resized" from="Margin" to="." method="_on_Margin_resized"]
+[connection signal="pressed" from="Margin/MenuTabs/Login/Seperator/Labels/LoginButton" to="Margin/MenuTabs/Login/Seperator/Input" method="_login_button"]
+[connection signal="pressed" from="Margin/MenuTabs/Login/Seperator/Input/ServerSel" to="Margin/MenuTabs/Login/Seperator/Input" method="_on_ServerSel_pressed"]
+[connection signal="text_entered" from="Margin/MenuTabs/Login/Seperator/Input/Pass" to="Margin/MenuTabs/Login/Seperator/Input" method="_on_Pass_text_entered"]

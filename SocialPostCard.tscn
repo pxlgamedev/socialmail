@@ -1,0 +1,359 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://MailSender.gd" type="Script" id=1]
+[ext_resource path="res://ReadEmailExample.py" type="Script" id=2]
+[ext_resource path="res://Styles/DefaultTextEntryStyle.tres" type="StyleBox" id=3]
+[ext_resource path="res://icon128.png" type="Texture" id=4]
+[ext_resource path="res://ContactTree.gd" type="Script" id=5]
+[ext_resource path="res://NewContact.gd" type="Script" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="Control" type="Control"]
+margin_right = 1084.0
+margin_bottom = 1920.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Seperator" type="HBoxContainer" parent="."]
+margin_right = 916.0
+margin_bottom = 1000.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Rectifier" type="PanelContainer" parent="Seperator"]
+visible = false
+margin_right = 133.0
+margin_bottom = 1003.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+custom_styles/panel = SubResource( 1 )
+
+[node name="Labels" type="VBoxContainer" parent="Seperator"]
+editor/display_folded = true
+visible = false
+margin_right = 142.0
+margin_bottom = 1003.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="ToLabel" type="Label" parent="Seperator/Labels"]
+visible = false
+margin_right = 323.0
+margin_bottom = 85.0
+size_flags_vertical = 3
+custom_constants/shadow_as_outline = 0
+text = "Post To:"
+align = 2
+valign = 1
+uppercase = true
+
+[node name="SubjectLabel" type="Label" parent="Seperator/Labels"]
+margin_right = 142.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+text = "Subject:"
+align = 2
+valign = 1
+uppercase = true
+
+[node name="MessageLabel" type="Label" parent="Seperator/Labels"]
+margin_top = 94.0
+margin_right = 142.0
+margin_bottom = 223.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Message:"
+align = 2
+valign = 1
+uppercase = true
+
+[node name="Panel" type="PanelContainer" parent="Seperator/Labels"]
+margin_top = 227.0
+margin_right = 142.0
+margin_bottom = 1003.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="SocialPostCard" type="VBoxContainer" parent="Seperator"]
+margin_right = 608.0
+margin_bottom = 1000.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+script = ExtResource( 1 )
+
+[node name="PyNode" type="Node2D" parent="Seperator/SocialPostCard"]
+script = ExtResource( 2 )
+
+[node name="Header" type="Label" parent="Seperator/SocialPostCard"]
+margin_right = 608.0
+margin_bottom = 196.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+align = 1
+
+[node name="To" type="Label" parent="Seperator/SocialPostCard"]
+visible = false
+margin_top = 176.0
+margin_right = 608.0
+margin_bottom = 291.0
+focus_next = NodePath("../Subject")
+focus_previous = NodePath("../../Labels/SendButton")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = ExtResource( 3 )
+autowrap = true
+
+[node name="Subject" type="LineEdit" parent="Seperator/SocialPostCard"]
+margin_top = 200.0
+margin_right = 608.0
+margin_bottom = 265.0
+focus_next = NodePath("../Body")
+focus_previous = NodePath("../To")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+custom_styles/normal = ExtResource( 3 )
+
+[node name="Body" type="TextEdit" parent="Seperator/SocialPostCard"]
+margin_top = 269.0
+margin_right = 608.0
+margin_bottom = 859.0
+focus_next = NodePath("../../Labels/SendButton")
+focus_previous = NodePath("../Subject")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.5
+custom_styles/normal = ExtResource( 3 )
+custom_colors/background_color = Color( 1, 1, 1, 1 )
+wrap_enabled = true
+
+[node name="Emotes" type="GridContainer" parent="Seperator/SocialPostCard"]
+editor/display_folded = true
+margin_top = 863.0
+margin_right = 608.0
+margin_bottom = 928.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+columns = 2
+
+[node name="Button" type="MenuButton" parent="Seperator/SocialPostCard/Emotes"]
+margin_right = 302.0
+margin_bottom = 65.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "testing"
+flat = false
+
+[node name="SendButton" type="Button" parent="Seperator/SocialPostCard/Emotes"]
+margin_left = 306.0
+margin_right = 608.0
+margin_bottom = 65.0
+focus_next = NodePath("../../SocialPostCard/To")
+focus_previous = NodePath("../../SocialPostCard/Body")
+focus_mode = 1
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+enabled_focus_mode = 1
+text = "Send"
+
+[node name="Error" type="Label" parent="Seperator/SocialPostCard"]
+margin_top = 932.0
+margin_right = 608.0
+margin_bottom = 1000.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+align = 1
+
+[node name="RightPanel" type="VBoxContainer" parent="Seperator"]
+editor/display_folded = true
+margin_left = 612.0
+margin_right = 916.0
+margin_bottom = 1000.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Seperator/RightPanel"]
+margin_right = 304.0
+margin_bottom = 185.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Seperator/RightPanel"]
+margin_top = 189.0
+margin_right = 304.0
+margin_bottom = 250.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "My Contact Books"
+align = 1
+valign = 2
+clip_text = true
+
+[node name="OptionTabs" type="TabContainer" parent="Seperator/RightPanel"]
+margin_top = 254.0
+margin_right = 304.0
+margin_bottom = 933.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.5
+tabs_visible = false
+
+[node name="Contacts" type="Tree" parent="Seperator/RightPanel/OptionTabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+allow_reselect = true
+allow_rmb_select = true
+select_mode = 2
+script = ExtResource( 5 )
+
+[node name="PopupMenu2" type="PopupMenu" parent="Seperator/RightPanel/OptionTabs/Contacts"]
+margin_right = 20.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+
+[node name="New" type="VBoxContainer" parent="Seperator/RightPanel/OptionTabs"]
+editor/display_folded = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 6 )
+
+[node name="Label fname" type="Label" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_right = 296.0
+margin_bottom = 14.0
+text = "First Name"
+
+[node name="fname" type="LineEdit" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 18.0
+margin_right = 296.0
+margin_bottom = 42.0
+
+[node name="Label lname" type="Label" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 46.0
+margin_right = 296.0
+margin_bottom = 60.0
+text = "Last Name"
+
+[node name="lname" type="LineEdit" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 64.0
+margin_right = 296.0
+margin_bottom = 88.0
+
+[node name="Label email" type="Label" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 92.0
+margin_right = 296.0
+margin_bottom = 106.0
+text = "Email Address"
+
+[node name="email" type="LineEdit" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 110.0
+margin_right = 296.0
+margin_bottom = 134.0
+
+[node name="Label address" type="Label" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 138.0
+margin_right = 296.0
+margin_bottom = 152.0
+text = "Mailing Address"
+
+[node name="address" type="LineEdit" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 156.0
+margin_right = 296.0
+margin_bottom = 180.0
+
+[node name="Label country" type="Label" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 184.0
+margin_right = 296.0
+margin_bottom = 198.0
+text = "Country"
+
+[node name="country" type="LineEdit" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 202.0
+margin_right = 296.0
+margin_bottom = 226.0
+
+[node name="Label phone" type="Label" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 230.0
+margin_right = 296.0
+margin_bottom = 244.0
+text = "Phone Number"
+
+[node name="phone" type="LineEdit" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 248.0
+margin_right = 296.0
+margin_bottom = 272.0
+
+[node name="Button" type="Button" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 276.0
+margin_right = 296.0
+margin_bottom = 296.0
+text = "Save Contact"
+
+[node name="Error" type="Label" parent="Seperator/RightPanel/OptionTabs/New"]
+margin_top = 300.0
+margin_right = 296.0
+margin_bottom = 314.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="Seperator/RightPanel"]
+margin_top = 937.0
+margin_right = 304.0
+margin_bottom = 1000.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+custom_styles/panel = SubResource( 2 )
+[connection signal="focus_entered" from="Seperator/SocialPostCard/Body" to="Seperator/SocialPostCard" method="_on_Body_focus_entered"]
+[connection signal="focus_exited" from="Seperator/SocialPostCard/Body" to="Seperator/SocialPostCard" method="_on_Body_focus_exited"]
+[connection signal="pressed" from="Seperator/SocialPostCard/Emotes/SendButton" to="Seperator/SocialPostCard" method="_send_mail"]
+[connection signal="empty_tree_rmb_selected" from="Seperator/RightPanel/OptionTabs/Contacts" to="Seperator/RightPanel/OptionTabs/Contacts" method="_on_Contacts_empty_tree_rmb_selected"]
+[connection signal="item_edited" from="Seperator/RightPanel/OptionTabs/Contacts" to="Seperator/RightPanel/OptionTabs/Contacts" method="_on_Contacts_item_edited"]
+[connection signal="item_rmb_edited" from="Seperator/RightPanel/OptionTabs/Contacts" to="Seperator/RightPanel/OptionTabs/Contacts" method="_on_Contacts_item_rmb_edited"]
+[connection signal="item_rmb_selected" from="Seperator/RightPanel/OptionTabs/Contacts" to="Seperator/RightPanel/OptionTabs/Contacts" method="_item_rmb_selected"]
+[connection signal="multi_selected" from="Seperator/RightPanel/OptionTabs/Contacts" to="Seperator/RightPanel/OptionTabs/Contacts" method="_on_Tree_multi_selected"]
+[connection signal="update_to" from="Seperator/RightPanel/OptionTabs/Contacts" to="Seperator/SocialPostCard" method="_on_Contacts_update_to"]
+[connection signal="reset_contacts" from="Seperator/RightPanel/OptionTabs/New" to="Seperator/RightPanel/OptionTabs/Contacts" method="_reset_contacts"]
+[connection signal="pressed" from="Seperator/RightPanel/OptionTabs/New/Button" to="Seperator/RightPanel/OptionTabs/New" method="_on_Button_pressed"]
