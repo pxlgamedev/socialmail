@@ -26,5 +26,11 @@ SocialMail takes a hard line on user privacy. No information is sent to a third 
 
 Additionally, your contacts information is never shared directly. When someone replies to one of your posts, only you will see it, unless you choose to share that reply. Even then, email addresses are never shared, only names. If someone in your contacts wants to contact a family member, they will have to ask you to forward their contact infromation. For thousands of years we called this an Introduction.
 
+# How, is SocialMail?
+
+SocialMail began as an idea, as all things do. Ideally, it could have been built on top of an existing email client. Unfortunately, open source and multi-platform email clients are like unicorns. A program had to be built from scratch.
+
+SocialMail is built with the open sourced Godot game engine, using a python library for accessing email via IMAP and SMTP protocols. Built from the ground up with multiplatform in mind, Godot was the perfect vehicle for designing a user interface that could translate to any platform. Godot supports, and SocialMail plans to deploy to; Windows, Linux, Mac, Android, iOs, and HTML5 web deployment.
+
 # Alpha means ALPHA
 SocialMail is in a highly expermental state and not ready for full time use. Features are still being added and changed daily, information storage is subject to change, and while the alpha has been fairly stable, it's still "use at your own risk."
