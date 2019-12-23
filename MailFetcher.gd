@@ -2,9 +2,16 @@ extends Control
 
 export var _mail = -1
 export var msgFrom = ""
+export var msgEmail = ""
 export var msgSubject = ""
 export var msgBody = ""
 export var msgDate = ""
+
+export var msgIsReply = false
+export var originSub = ""
+export var originBody = ""
+export var originBcc = ""
+export var originDate = ""
 
 export var images = []
 var hasImage = false
@@ -31,6 +38,17 @@ func _print_mail():
 	$Body.bbcode_text = msgBody
 	$Date.bbcode_text = str("[right] ", msgDate, " ")
 	$Buttons/Error.bbcode_text = ""
+	if msgIsReply:
+		$From.bbcode_text = User_Data.imap_user
+		$Subject.bbcode_text = originSub
+		$Body.bbcode_text = originBody
+		$Date.bbcode_text = str("[right] ", originDate, " ")
+		$Body.size_flags_stretch_ratio = 4
+		$RepliesBox.size_flags_stretch_ratio = 4
+		$RepliesBox/VBoxContainer/Control/VBoxContainer/From.bbcode_text = str(msgFrom, " wrote:")
+		$RepliesBox/VBoxContainer/Control/VBoxContainer/Body.bbcode_text = msgBody
+		$RepliesBox/VBoxContainer/Control/VBoxContainer/Date.bbcode_text = str("[right] ", msgDate, " ")
+		$RepliesBox.visible = true
 	User_Data.postage = true
 
 func display_image():
@@ -57,7 +75,7 @@ func _scrolling_mail(mail):
 
 func _thread_function(userdata):
 	mutex.lock()
-	$PyNode._read_mail(User_Data.imap_host[2], User_Data.imap_host[3], User_Data.imap_user, User_Data.imap_pass, User_Data.imap_host[4], _mail)
+	$PyNode._read_mail(User_Data.imap_host[2], User_Data.imap_host[3], User_Data.imap_user, User_Data.imap_pass, User_Data.imap_host[4], _mail, User_Data.imap_host[5])
 	mutex.unlock()
 
 func _exit_tree():
@@ -66,7 +84,8 @@ func _exit_tree():
 func _on_Reply_pressed():
 	var subject = "Re: " + msgSubject
 	var message = $Reply.text
-	$PyNode._sending_mail(User_Data.imap_host[0], User_Data.imap_host[1], User_Data.imap_user, User_Data.imap_pass, msgFrom, subject, message)
+	### send to original bcc and include current message
+	$PyNode._sending_mail(User_Data.imap_host[0], User_Data.imap_host[1], User_Data.imap_user, User_Data.imap_pass, msgEmail, subject, message)
 
 func _mail_sent():
 	$Buttons/Error.text = "Replied"
@@ -77,8 +96,16 @@ func _failed_to_send():
 
 func _on_Reply_focus_entered():
 	$Reply.size_flags_stretch_ratio = 3
-	$Body.size_flags_stretch_ratio = 5
+	if !msgIsReply and !hasImage:
+		$Body.size_flags_stretch_ratio = 6
+	if msgIsReply and !hasImage:
+		$Body.size_flags_stretch_ratio = 2
+		$RepliesBox.size_flags_stretch_ratio = 4
 
 func _on_Reply_focus_exited():
 	$Reply.size_flags_stretch_ratio = 1
-	$Body.size_flags_stretch_ratio = 8
+	if !msgIsReply and !hasImage:
+		$Body.size_flags_stretch_ratio = 8
+	if msgIsReply and !hasImage:
+		$Body.size_flags_stretch_ratio = 4
+		$RepliesBox.size_flags_stretch_ratio = 4

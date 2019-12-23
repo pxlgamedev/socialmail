@@ -7,8 +7,8 @@ var imap_user = ""
 var imap_pass = ""
 
 var smtp_servers = {
-	# smtp login, SMTP port, IMAP login, IMAP4_SSL port, folder name
-	gmail = ["imap.gmail.com", 587, "imap.gmail.com", 993, "Inbox", "Sent"], #'"[Gmail]/All Mail"'
+	# smtp login, SMTP port, IMAP login, IMAP4_SSL port, inbox folder name, sent mail folder name
+	gmail = ["imap.gmail.com", 587, "imap.gmail.com", 993, "Inbox", '"[Gmail]/Sent Mail"'], #'"[Gmail]/All Mail"'
 	Outlook = ["smtp-mail.outlook.com", 587, "imap-mail.outlook.com", 143, "Inbox", "Sent"],
 	#Yahoo = ["smtp.mail.yahoo.com", 465, "imap.mail.yahoo.com", 993, "Inbox"],
 	#Att = ["smtp.mail.att.net", 465, "imap.mail.att.net", 993, "Inbox"],
