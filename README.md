@@ -7,7 +7,7 @@ Unlike other social networking apps:
 * Does not collect any user information.
 * Does not control any data you choose to share.
 
-SocialMail aims to replicate all the popular features of other social media networks, without a centralized server. Messages are sent and recieved via a standard email account, everything else is handled locally by the app. 'Posts' are displayed in an endless scrolling page, with pictures, sharing, and comments. Replies are displayed as comments, messages can me shared with everyone in your contact book, or select lists like "Family" or "Friends."
+SocialMail aims to replicate all the popular features of other social media networks, without a centralized server. Messages are sent and recieved via a standard email account, everything else is handled locally by the app. 'Posts' are displayed in an endless scrolling page, with pictures, sharing, and comments. Replies are displayed as comments, messages can be shared with everyone in your contact book, or select lists like "Family" or "Friends."
 
 # Why SocialMail?
 
